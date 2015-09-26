@@ -1,3 +1,5 @@
+# Based on example "Open Device for Live Capture" from http://devdungeon.com/content/packet-capture-injection-and-analysis-gopacket
+
 package main
 
 import (
