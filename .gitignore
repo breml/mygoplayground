@@ -26,3 +26,4 @@ _testmain.go
 # executables
 capture/capture
 listdev/listdev
+pipe/pipe
