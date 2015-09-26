@@ -1,4 +1,4 @@
-# Based on example "Find devices" from http://devdungeon.com/content/packet-capture-injection-and-analysis-gopacket
+// Based on example "Find devices" from http://devdungeon.com/content/packet-capture-injection-and-analysis-gopacket
 
 package main
 
