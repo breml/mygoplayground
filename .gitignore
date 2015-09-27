@@ -27,3 +27,4 @@ _testmain.go
 capture/capture
 listdev/listdev
 pipe/pipe
+compilebpf/compilebpf
