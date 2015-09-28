@@ -23,8 +23,11 @@ _testmain.go
 *.test
 *.prof
 
+*.swp
+
 # executables
 capture/capture
 listdev/listdev
 pipe/pipe
 compilebpf/compilebpf
+filter/filter
