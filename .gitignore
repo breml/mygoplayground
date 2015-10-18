@@ -25,11 +25,12 @@ _testmain.go
 
 *.swp
 
-# goautogitignore start
+# gogitignore start
 capture/capture
 compilebpf/compilebpf
 filter/filter
+goparser/goparser
 listdev/listdev
 pipe/pipe
 redis-mysql-lookup/redis-mysql-lookup
-# goautogitignore end
+# gogitignore end
