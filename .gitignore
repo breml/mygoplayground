@@ -28,6 +28,8 @@ _testmain.go
 # gogitignore start
 capture/capture
 compilebpf/compilebpf
+echoclient/echoclient
+echoserver/echoserver
 filter/filter
 goparser/goparser
 listdev/listdev
