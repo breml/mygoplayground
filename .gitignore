@@ -28,6 +28,7 @@ _testmain.go
 # gogitignore start
 capture/capture
 compilebpf/compilebpf
+defertest/defertest
 echoclient/echoclient
 echoserver/echoserver
 filter/filter
