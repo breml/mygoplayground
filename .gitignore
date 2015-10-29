@@ -36,4 +36,5 @@ goparser/goparser
 listdev/listdev
 pipe/pipe
 redis-mysql-lookup/redis-mysql-lookup
+structtags/structtags
 # gogitignore end
