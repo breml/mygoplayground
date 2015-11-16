@@ -35,6 +35,7 @@ filter/filter
 goparser/goparser
 listdev/listdev
 pipe/pipe
+protobuf/protobuf
 redis-mysql-lookup/redis-mysql-lookup
 structtags/structtags
 # gogitignore end
