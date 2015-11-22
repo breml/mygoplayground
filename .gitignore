@@ -34,6 +34,7 @@ echoserver/echoserver
 filter/filter
 goparser/goparser
 listdev/listdev
+mruby/mruby
 pipe/pipe
 protobuf/protobuf
 redis-mysql-lookup/redis-mysql-lookup
