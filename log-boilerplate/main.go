@@ -2,15 +2,19 @@ package main
 
 import (
 	"flag"
+	"io"
 	"log"
 	"os"
 )
 
 var (
-	logLevel = flag.Int("loglevel", 1, "0 = no output, 1 = standard log, 2 = verbose log")
+	logLevel  = flag.Int("loglevel", 1, "0 = no output, 1 = standard log, 2 = verbose log")
+	logTarget = flag.String("logtarget", "/dev/stdout", "log target")
 
-	logger      = log.New(os.Stdout, "LOG   ", log.LstdFlags)
-	debugLogger = log.New(os.Stdout, "DEBUG ", log.LstdFlags)
+	logTargetWriter io.Writer
+
+	logger      *log.Logger
+	debugLogger *log.Logger
 
 	emptyLogf = func(fmt string, args ...interface{}) {}
 	stdLogf   = func(fmt string, args ...interface{}) { logger.Printf(fmt, args...) }
@@ -21,7 +25,25 @@ var (
 )
 
 func main() {
+	var err error
+
 	flag.Parse()
+
+	_, err = os.Stat(*logTarget)
+	if os.IsExist(err) {
+		logTargetWriter, err = os.OpenFile(*logTarget, os.O_WRONLY, 0x600)
+		if err != nil {
+			log.Fatalln("fatal: unable to open log target", err)
+		}
+	} else {
+		logTargetWriter, err = os.Create(*logTarget)
+		if err != nil {
+			log.Fatalln("fatal: unable to create log target", err)
+		}
+	}
+
+	logger = log.New(logTargetWriter, "LOG   ", log.LstdFlags)
+	debugLogger = log.New(logTargetWriter, "DEBUG ", log.LstdFlags)
 
 	switch *logLevel {
 	case 0:
