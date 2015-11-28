@@ -32,6 +32,7 @@ defertest/defertest
 echoclient/echoclient
 echoserver/echoserver
 filter/filter
+goauto/goauto
 goparser/goparser
 listdev/listdev
 mruby/mruby
