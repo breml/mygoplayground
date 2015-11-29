@@ -30,16 +30,20 @@ func main() {
 	flag.Parse()
 
 	_, err = os.Stat(*logTarget)
-	if os.IsExist(err) {
-		logTargetWriter, err = os.OpenFile(*logTarget, os.O_WRONLY, 0x600)
-		if err != nil {
-			log.Fatalln("fatal: unable to open log target", err)
-		}
-	} else {
+	if os.IsNotExist(err) {
 		logTargetWriter, err = os.Create(*logTarget)
 		if err != nil {
 			log.Fatalln("fatal: unable to create log target", err)
 		}
+	} else {
+		logTargetWriter, err = os.OpenFile(*logTarget, os.O_WRONLY|os.O_APPEND, 0x600)
+		if err != nil {
+			log.Fatalln("fatal: unable to open log target", err)
+		}
+	}
+	_, err = logTargetWriter.Write([]byte(""))
+	if err != nil {
+		log.Fatalln("fatal: unable to write to log target")
 	}
 
 	logger = log.New(logTargetWriter, "LOG   ", log.LstdFlags)

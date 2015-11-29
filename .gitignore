@@ -35,6 +35,7 @@ filter/filter
 goauto/goauto
 goparser/goparser
 listdev/listdev
+log-boilerplate/log-boilerplate
 mruby/mruby
 pipe/pipe
 protobuf/protobuf
