@@ -29,6 +29,7 @@ func main() {
 
 	flag.Parse()
 
+	// Set logTarget
 	_, err = os.Stat(*logTarget)
 	if os.IsNotExist(err) {
 		logTargetWriter, err = os.Create(*logTarget)
@@ -41,6 +42,8 @@ func main() {
 			log.Fatalln("fatal: unable to open log target", err)
 		}
 	}
+
+	// Check if logTarget is writable
 	_, err = logTargetWriter.Write([]byte(""))
 	if err != nil {
 		log.Fatalln("fatal: unable to write to log target")
@@ -49,6 +52,7 @@ func main() {
 	logger = log.New(logTargetWriter, "LOG   ", log.LstdFlags)
 	debugLogger = log.New(logTargetWriter, "DEBUG ", log.LstdFlags)
 
+	// Set log-function based on log level
 	switch *logLevel {
 	case 0:
 		logf = emptyLogf
@@ -57,6 +61,7 @@ func main() {
 	default:
 	}
 
+	// Write example log lines
 	logf("log output %s, %d", "string1", 10)
 	debugf("debug output %s, %d", "string1", 10)
 }
