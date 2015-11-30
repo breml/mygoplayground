@@ -27,6 +27,7 @@ _testmain.go
 
 # gogitignore start
 capture/capture
+channel-test/channel-test
 compilebpf/compilebpf
 defertest/defertest
 echoclient/echoclient
