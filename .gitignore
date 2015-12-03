@@ -42,4 +42,5 @@ pipe/pipe
 protobuf/protobuf
 redis-mysql-lookup/redis-mysql-lookup
 structtags/structtags
+url-parse/url-parse
 # gogitignore end
