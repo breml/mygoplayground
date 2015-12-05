@@ -8,12 +8,13 @@ import (
 	"net"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 )
 
 var (
 	logLevel      = flag.Int("loglevel", 1, "0 = no output, 1 = standard log, 2 = verbose log")
-	logTarget     = flag.String("logtarget", "", "log target, if not set it defaults to stdout, accepts URL, e.g. syslog://syslog-host:514, file:///path/to/file.log")
+	logTarget     = flag.String("logtarget", "", "log target, if not set it defaults to stdout, accepts URL, e.g. syslog://syslog-host:514?priority=29&tag=myapp, file:///path/to/file.log")
 	logPermission = flag.Int("logperm", 0600, "permission for log file, default in ocatal: 0600")
 
 	logTargetWriter io.Writer
@@ -41,6 +42,7 @@ func main() {
 		if err != nil {
 			log.Fatalln("fatal: unable to parse logtarget url", err)
 		}
+		query, _ := url.ParseQuery(u.RawQuery)
 
 		switch {
 		case (u.Scheme == "" || u.Scheme == "file") && u.Path != "":
@@ -75,11 +77,22 @@ func main() {
 
 		case strings.HasPrefix(u.Scheme, "syslog"):
 			var syslogLogger *syslog.Writer
-			priority := syslog.LOG_NOTICE | syslog.LOG_LOCAL0
-			tag := ""
+			var tag string
+			priority := int(syslog.LOG_NOTICE | syslog.LOG_LOCAL0)
+
+			if query["priority"][0] != "" {
+				priority, err = strconv.Atoi(query["priority"][0])
+				if err != nil {
+					log.Fatalln("fatal: unable to connect to syslog", *logTarget, "err:", err)
+				}
+			}
+
+			if query["tag"][0] != "" {
+				tag = query["tag"][0]
+			}
 
 			if u.Host == "" {
-				syslogLogger, err = syslog.New(priority, tag)
+				syslogLogger, err = syslog.New(syslog.Priority(priority), tag)
 				if err != nil {
 					log.Fatalln("fatal: unable to connect to syslog", *logTarget, "err:", err)
 				}
@@ -95,7 +108,7 @@ func main() {
 					u.Host = u.Host + ":514"
 				}
 
-				syslogLogger, err = syslog.Dial(network, u.Host, priority, tag)
+				syslogLogger, err = syslog.Dial(network, u.Host, syslog.Priority(priority), tag)
 				if err != nil {
 					log.Fatalln("fatal: unable to connect to syslog", *logTarget, "err:", err)
 				}
