@@ -32,6 +32,7 @@ compilebpf/compilebpf
 defertest/defertest
 echoclient/echoclient
 echoserver/echoserver
+empty-interface-fuzz/empty-interface-fuzz
 filter/filter
 goauto/goauto
 goparser/goparser
