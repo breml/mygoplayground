@@ -42,6 +42,7 @@ mruby/mruby
 pipe/pipe
 protobuf/protobuf
 redis-mysql-lookup/redis-mysql-lookup
+snake-test/snake-test
 structtags/structtags
 url-parse/url-parse
 # gogitignore end
