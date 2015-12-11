@@ -27,6 +27,7 @@ _testmain.go
 
 # gogitignore start
 capture/capture
+cgo/cgo
 channel-test/channel-test
 compilebpf/compilebpf
 defertest/defertest
