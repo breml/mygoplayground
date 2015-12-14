@@ -2,8 +2,12 @@
 #include <stdlib.h>
 #include "_cgo_export.h"
 
+int count = 0;
+
+void cGoCall() {
+	GoCall();
+}
+
 void cCall() {
-	const char *buffer = "test from c\n";
-	fputs(buffer, stdout);
-	goCall();
+	count++;
 }
