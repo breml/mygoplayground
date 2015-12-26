@@ -46,5 +46,6 @@ protobuf/protobuf
 redis-mysql-lookup/redis-mysql-lookup
 snake-test/snake-test
 structtags/structtags
+svg/svg
 url-parse/url-parse
 # gogitignore end
