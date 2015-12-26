@@ -25,6 +25,8 @@ _testmain.go
 
 *.swp
 
+*.svg
+
 # gogitignore start
 capture/capture
 cgo/cgo
