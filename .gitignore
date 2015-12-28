@@ -37,6 +37,7 @@ echoclient/echoclient
 echoserver/echoserver
 empty-interface-fuzz/empty-interface-fuzz
 filter/filter
+go-linq/go-linq
 goauto/goauto
 goparser/goparser
 listdev/listdev
