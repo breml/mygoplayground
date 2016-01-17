@@ -33,6 +33,7 @@ cgo/cgo
 channel-test/channel-test
 compilebpf/compilebpf
 defertest/defertest
+dinig-philosophers/dinig-philosophers
 echoclient/echoclient
 echoserver/echoserver
 empty-interface-fuzz/empty-interface-fuzz
