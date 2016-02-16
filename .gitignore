@@ -49,8 +49,10 @@ pipe/pipe
 protobuf/protobuf
 redis-mysql-lookup/redis-mysql-lookup
 snake-test/snake-test
+sshclient/sshclient
 structtags/structtags
 svg/svg
+unicodeblock/unicodeblock
 url-parse/url-parse
 vocabulary/vocabulary
 # gogitignore end
