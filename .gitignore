@@ -41,6 +41,7 @@ filter/filter
 go-linq/go-linq
 goauto/goauto
 goparser/goparser
+gosnmp/gosnmp
 listdev/listdev
 log-boilerplate/log-boilerplate
 mruby/mruby
