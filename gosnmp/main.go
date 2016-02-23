@@ -22,27 +22,35 @@ func main() {
 	//s.SetDebug(true)
 	//s.SetVerbose(true)
 
+	oids := []string{
+		".1.3.6.1.4.1.12356.101.4.1.1",
+		//".1.3.6.1.4.1.12356.101.4.1.2.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.3.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.4.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.5.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.6.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.7.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.8.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.9.0",
+	}
+
 	s.SetTimeout(cmdTimeout)
-	oid := cmdOid
-	for i := 0; i < 10; i++ {
-		fmt.Printf("Getting %s\n", oid)
-		resp, err := s.GetNext(oid)
-		if err != nil {
-			fmt.Printf("Error getting response: %s\n", err.Error())
-		} else {
-			for _, v := range resp.Variables {
-				fmt.Printf("%s -> ", v.Name)
-				switch v.Type {
-				case gosnmp.OctetString:
-					if s, ok := v.Value.(string); ok {
-						fmt.Printf("%s\n", s)
-					} else {
-						fmt.Printf("Response is not a string\n")
-					}
-				default:
-					fmt.Printf("Type: %s(%#x) - Value: %v\n", v.Type, int(v.Type), v.Value)
+	fmt.Printf("Getting %s\n", oids)
+	resp, err := s.GetBulk(0, 50, oids...)
+	if err != nil {
+		fmt.Printf("Error getting response: %s\n", err.Error())
+	} else {
+		for _, v := range resp.Variables {
+			fmt.Printf("%s -> ", v.Name)
+			switch v.Type {
+			case gosnmp.OctetString:
+				if s, ok := v.Value.(string); ok {
+					fmt.Printf("%s\n", s)
+				} else {
+					fmt.Printf("Response is not a string\n")
 				}
-				oid = v.Name
+			default:
+				fmt.Printf("Type: %s(%#x) - Value: %v\n", v.Type, int(v.Type), v.Value)
 			}
 		}
 	}
