@@ -48,6 +48,7 @@ mruby/mruby
 nil-pointer/nil-pointer
 pipe/pipe
 protobuf/protobuf
+read-moduli/read-moduli
 redis-mysql-lookup/redis-mysql-lookup
 snake-test/snake-test
 sshclient/sshclient
