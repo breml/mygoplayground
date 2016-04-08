@@ -22,6 +22,18 @@ func main() {
 	//s.SetDebug(true)
 	//s.SetVerbose(true)
 
+	oids := []string{
+		".1.3.6.1.4.1.12356.101.4.1.1",
+		//".1.3.6.1.4.1.12356.101.4.1.2.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.3.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.4.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.5.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.6.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.7.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.8.0",
+		// ".1.3.6.1.4.1.12356.101.4.1.9.0",
+	}
+
 	s.SetTimeout(cmdTimeout)
 	oid := cmdOid
 	oids := []string{
@@ -36,6 +48,8 @@ func main() {
 	fmt.Printf("Getting %s\n", oid)
 	//resp, err := s.GetMulti(oids) // Max 5
 	resp, err := s.GetBulk(0, 50, ".1.3.6.1.4.1.12356.101.4.1.1")
+	//fmt.Printf("Getting %s\n", oids)
+	//resp, err := s.GetBulk(0, 50, oids...)
 	if err != nil {
 		fmt.Printf("Error getting response: %s\n", err.Error())
 	} else {
