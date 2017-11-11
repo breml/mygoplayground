@@ -10,11 +10,11 @@ import (
 )
 
 func main() {
-	const cmdTimeout = 10
+	const cmdTimeout = 1
 	const cmdOid = ".1.3.6.1.4.1.12356.101.4.1.1" // Device Version
 	//const cmdOid = ".1.3.6.1.4.1.12356.101.4.1.4.0" // MemUsage
 
-	s, err := gosnmp.NewGoSNMP("10.168.1.1", "public", gosnmp.Version2c, cmdTimeout)
+	s, err := gosnmp.NewGoSNMP("10.10.120.1", "public", gosnmp.Version2c, cmdTimeout)
 	if err != nil {
 		fmt.Printf("Error creating SNMP instance: %s\n", err.Error())
 		return
@@ -35,8 +35,21 @@ func main() {
 	}
 
 	s.SetTimeout(cmdTimeout)
-	fmt.Printf("Getting %s\n", oids)
-	resp, err := s.GetBulk(0, 50, oids...)
+	oid := cmdOid
+	oids := []string{
+		".1.3.6.1.4.1.12356.101.4.1.1.0",
+		".1.3.6.1.4.1.12356.101.4.1.2.0",
+		".1.3.6.1.4.1.12356.101.4.1.3.0",
+		".1.3.6.1.4.1.12356.101.4.1.4.0",
+		".1.3.6.1.4.1.12356.101.4.1.5.0",
+	}
+	_ = oids
+	//for i := 0; i < 10; i++ {
+	fmt.Printf("Getting %s\n", oid)
+	//resp, err := s.GetMulti(oids) // Max 5
+	resp, err := s.GetBulk(0, 50, ".1.3.6.1.4.1.12356.101.4.1.1")
+	//fmt.Printf("Getting %s\n", oids)
+	//resp, err := s.GetBulk(0, 50, oids...)
 	if err != nil {
 		fmt.Printf("Error getting response: %s\n", err.Error())
 	} else {
@@ -52,6 +65,8 @@ func main() {
 			default:
 				fmt.Printf("Type: %s(%#x) - Value: %v\n", v.Type, int(v.Type), v.Value)
 			}
+			oid = v.Name
 		}
 	}
+	//}
 }
